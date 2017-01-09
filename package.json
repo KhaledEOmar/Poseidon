@@ -1,0 +1,37 @@
+{
+  "name": "poseidon",
+  "version": "1.0.0",
+  "description": "Workout Tracking WebApp",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular/quickstart.git"
+  },
+  "author": "Khaled Omar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angular/quickstart/issues"
+  },
+  "homepage": "https://github.com/angular/quickstart#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.6",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-sass": "^3.0.0",
+    "gulp-sourcemaps": "^1.9.1",
+    "gulp-uglify": "^2.0.0",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "jquery": "^3.1.1",
+    "mongoose": "^4.7.6"
+  }
+}
