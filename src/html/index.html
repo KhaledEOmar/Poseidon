@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Poseidon</title>
+<html>
+	<head>
+		<link rel="stylesheet" href="css/main.css">
 
-    <!-- CSS -->
-	<link rel="stylesheet" href="css/main.css">
-</head>
-<body>
-    
-	<script src="js/all.js"></script>
-</body>
+	</head>
+
+	<body ng-app="poseidon">
+
+		<ui-view></ui-view>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
+		<script src="js/poseidon.js"></script>
+
+	</body>
 </html>
