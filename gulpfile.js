@@ -19,25 +19,35 @@ gulp.task('css', function(){
 
 gulp.task('js', function(){
 	return gulp.src([
-		'./node_modules/jquery/dist/jquery.min.js',
 		'./src/js/poseidon.js'
 	])
-	.pipe(plugins.concat('all.js'))
-	.pipe(plugins.uglify())
 	.pipe(gulp.dest('./public/js'))
 	.pipe(browserSync.stream());
 });
 
 gulp.task('html', function() {
   return gulp.src('./src/html/*.html')
-    .pipe(plugins.htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest('./public'));
+    .pipe(gulp.dest('./public'))
+	.pipe(browserSync.stream());
 });
+
+gulp.task('imgs', function() {
+  return gulp.src('./src/imgs/*.*')
+    .pipe(gulp.dest('./public/imgs'));
+});
+
+gulp.task('fonts', function() {
+  return gulp.src('./src/fonts/*.*')
+    .pipe(gulp.dest('./public/fonts'));
+});
+
 
 gulp.task('watch',function(){
 	gulp.watch('./src/sass/*.scss', ['css']);
 	gulp.watch('./src/html/*.html', ['html']);
 	gulp.watch('./src/js/*.js', ['js']);
+	gulp.watch('./src/imgs/*.*',['imgs']);
+	gulp.watch('./src/fonts/*.*',['fonts']);
 	gulp.watch('./server.js',['nodemon']);
 	gulp.watch('*.html').on('change',browserSync.reload);
 });
@@ -66,4 +76,4 @@ gulp.task('nodemon', function (cb) {
 	});
 });
 
-gulp.task('default', ['css','js', 'html','watch', 'nodemon','browserSync']);
+gulp.task('default', ['css','js', 'html','watch', 'imgs', 'fonts', 'nodemon','browserSync']);
