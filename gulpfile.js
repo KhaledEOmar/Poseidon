@@ -48,7 +48,6 @@ gulp.task('watch',function(){
 	gulp.watch('./src/js/*.js', ['js']);
 	gulp.watch('./src/imgs/*.*',['imgs']);
 	gulp.watch('./src/fonts/*.*',['fonts']);
-	gulp.watch('./server.js',['nodemon']);
 	gulp.watch('*.html').on('change',browserSync.reload);
 });
 

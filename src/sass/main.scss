@@ -133,6 +133,28 @@ body{
 	}
 }
 
-.active{
-	color: $thirdColor;
+#topNav{
+	background-color: $primaryColor;
+	width: 100vw;
+	height:6vh;
+	top:0;
+	text-align:center;
+	font-size:3vh;
+
+	li{
+		display: inline-block;
+		margin-top:1vh;
+		min-width:32vw;
+	}
+	
+	a{
+		color: #ffffff;
+		text-decoration: none;
+	}
+	
+	 
+	.active{
+		color: $thirdColor;
+	}
+		
 }
