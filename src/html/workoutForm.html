@@ -1,0 +1,12 @@
+<section id="workoutBottomBar" ng-init="formStatus = 'formStatusInvalid'">
+	<section ng-click="weightLift()" ng-attr-id="{{isWeightLifting ? 'weightType': 'cardioType'}}"><!--
+	--></section><!--
+	--><section id="workoutForm">
+		<input type="text" id="workoutNameInput" ng-model="workoutName"></label>
+		<input type="text" id="workoutWeightInput" ng-model="workoutWeight"></label>
+		<input type="text" id="workoutRepsInput" ng-model="workoutReps"></label>
+	</section><!--
+	--><section ng-attr-id="{{ formStatus }}">
+		
+	</section>
+</section>
