@@ -44,9 +44,14 @@ table {
 /* START */
 
 
+
+/* CONSTANT VARIABLES */
+
 $primaryColor: #022b3a;
 $secondColor: #1f7a8c;
 $thirdColor: #ffd700;
+$accepted: #89e000;
+$danger: #FF0000;
 
 
 
@@ -59,6 +64,19 @@ $thirdColor: #ffd700;
     font-style: normal;
 }
 
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
 
 body{
 	font-family:'nextfont';
@@ -68,7 +86,13 @@ body{
 		border-radius: 4px;
 		padding: 20px;
 	}
+	
+	min-widht: 320px;
+
 }
+
+/* LOGIN VIEW */
+
 
 #loginContainer{
 	background: $primaryColor;
@@ -118,6 +142,9 @@ body{
 
 }
 
+/* SIGNUP VIEW */
+
+
 #signupLink{
 	position:absolute;
 	height:10vh;
@@ -133,6 +160,10 @@ body{
 	}
 }
 
+
+/* NAVIGATION */
+
+
 #topNav{
 	background-color: $primaryColor;
 	width: 100vw;
@@ -140,11 +171,10 @@ body{
 	top:0;
 	text-align:center;
 	font-size:3vh;
-
 	li{
 		display: inline-block;
 		margin-top:1vh;
-		min-width:32vw;
+		width:32vw;
 	}
 	
 	a{
@@ -158,3 +188,164 @@ body{
 	}
 		
 }
+
+#userInfo{
+	width:100vw;
+	margin-top:1vh;
+	text-align: center;
+	
+	li{
+		display: inline-block;
+		width:48vw;
+	}
+	
+	#username{
+		text-align:left;
+	}
+	#date{
+		text-align:right;
+	}
+
+}
+
+
+/* WORKOUT VIEW */
+
+#workouts{
+	width: 100vw;
+	max-height: 70vh;
+	text-align:center;
+	margin-top: 2vh;
+	overflow: scroll;
+    overflow-x: hidden;
+
+}
+
+.secHead{
+	width:97vw;
+	min-height: 10vh;
+	margin: 0 auto;
+	background-color: $thirdColor;
+
+	
+	img{
+		height: 5vh;
+		margin-top:.5vh;
+	}
+	
+	ul{
+		margin: 0 2vw;
+	}
+	
+	li{
+		display:inline-block;
+		font-size: 2vh;
+		text-align:left;
+	}
+	
+	.firstCol{
+		width: 26vw;
+	}
+	.secondCol{
+		width: 22vw;
+	}
+	.thirdCol{
+		width: 25vw;
+	}
+	.delete , .repeat{
+		width:10vw;
+	}
+
+	
+}
+
+.logItem{
+	width:97vw;
+	height: 6vh;
+	margin: 0 auto;
+	color:#ffffff;
+	background-color:$primaryColor;
+
+	li{
+		display:inline-block;
+		font-size: 2vh;
+		text-align:left;
+	}	
+	.firstCol{
+		width: 26vw;
+	}
+	.secondCol{
+		width: 22vw;
+	}
+	.thirdCol{
+		width: 25vw;
+	}
+	.delete , .repeat{
+		width:10vw;
+	}
+}
+
+
+
+#workoutBottomBar{
+	position:fixed;
+	width: 100vw;
+	height:14vh;
+	bottom:0;
+	font-size:3vh;
+
+	#cardioType{
+		display: inline-block;
+		margin-top:1vh;
+		width:17vw;
+		height: 14vh;
+		text-align: center;
+		background: url(../imgs/whiteCardio.png) no - repeat center center;
+		background-color: $primaryColor;
+	}
+	
+	#weightType{
+		display: inline-block;
+		margin-top:1vh;
+		width:17vw;
+		height: 14vh;
+		text-align: center;
+		background: url(../imgs/vertWhiteWeight.png) no - repeat center center;
+		background-size: 5vh auto;
+		background-color: $primaryColor;
+	}
+	
+	#workoutForm{
+		display: inline-block;
+		margin-top:1vh;
+		width:66vw;
+		height: 14vh;
+		text-align: center;
+		background-color: $secondColor;
+	}	
+	
+	#formStatusValid{
+		display: inline-block;
+		margin-top:1vh;
+		width:17vw;
+		height: 14vh;
+		text-align: center;
+		background-color: $accepted;
+	}
+	
+	#formStatusInvalid{
+		display: inline-block;
+		margin-top:1vh;
+		width:17vw;
+		height: 14vh;
+		text-align: center;
+		background-color: $danger;
+	}
+	
+}
+
+
+
+
+
+

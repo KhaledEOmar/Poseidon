@@ -1,1 +1,49 @@
 <ng-include src="'header.html'"></ng-include>
+
+<div id="workouts">
+	<section class="secHead" ng-if="!weightEmpty">
+		<img src="/imgs/blueWeight.png"><!--
+		--><ul>
+			<li class="firstCol">Workout</li><!--
+			--><li class="secondCol">Weight</li><!--
+			--><li class="thirdCol">Reps</li><!--
+			--><li class="delete"></li><!--
+			--><li class="repeat"></li><!--
+			-->
+		</ul>
+	</section><!--
+	
+	--><ul class="logItem" ng-if="!weightEmpty">
+
+			<li class="firstCol">Bench Press</li><!--
+			--><li class="secondCol">180</li><!--
+			--><li class="thirdCol">8</li><!--
+			--><li class="delete">x</li><!--
+			--><li class="repeat">></li><!--
+			-->
+	</ul><!--
+	
+	--><section class="secHead" ng-if="!cardioEmpty">
+		<img src="/imgs/blueCardio.png"><!--
+		--><ul>
+			<li class="firstCol">Workout</li><!--
+			--><li class="secondCol">Weight</li><!--
+			--><li class="thirdCol">Reps</li><!--
+			--><li class="delete"></li><!--
+			--><li class="repeat"></li><!--
+			-->
+		</ul>
+	</section><!--
+	
+	--><ul class="logItem" ng-if="!cardioEmpty">
+			<li class="firstCol">Bench Press</li><!--
+			--><li class="secondCol">180</li><!--
+			--><li class="thirdCol">8</li><!--
+			--><li class="delete">x</li><!--
+			--><li class="repeat">></li><!--
+			-->
+	</section>
+</div>
+
+
+<ng-include src="'workoutForm.html'"></ng-include>

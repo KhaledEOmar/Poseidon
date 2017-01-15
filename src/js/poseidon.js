@@ -40,3 +40,5 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
 
 	$urlRouterProvider.otherwise("/");
 });
+
+//$scope.date = new Date();
