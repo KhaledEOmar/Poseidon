@@ -1,10 +1,11 @@
-var myApp = angular.module('poseidon', ['ui.router']);
+var poseidonApp = angular.module('poseidon', ['ui.router']);
 
-myApp.config(function($stateProvider, $urlRouterProvider) {
+poseidonApp.config(function($stateProvider, $urlRouterProvider) {
   
 	var workoutState = {
 		name: 'workout',
 		url: '/workout',
+		controller:'workoutCtrl',
 		templateUrl: './workout-partial.html'
 	}
 
@@ -41,4 +42,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise("/");
 });
 
-//$scope.date = new Date();
+
+poseidonApp.controller('workoutCtrl',['$scope',function($scope){
+	$scope.date = new Date();
+}]);
