@@ -60,6 +60,8 @@ table {
 $primaryColor: #022b3a;
 $secondColor: #1f7a8c;
 $thirdColor: #ffd700;
+$forthColor: #c2c2c2;
+$placeHolder: #84b6c0;
 $accepted: #89e000;
 $danger: #FF0000;
 
@@ -71,7 +73,7 @@ $danger: #FF0000;
 	border-radius: 5px;
 	height: 5vh;
 	font-size: 3vh;
-	color: $secondColor;
+	color: $placeHolder;
 }
 ::-moz-placeholder { /* Firefox 19+ */
 	font-family:'nextfont';
@@ -80,7 +82,7 @@ $danger: #FF0000;
 	border-radius: 5px;
 	height: 5vh;
 	font-size: 3vh;
-	color: $secondColor;
+	color: $placeHolder;
 }
 :-ms-input-placeholder { /* IE 10+ */
 	font-family:'nextfont';
@@ -89,7 +91,7 @@ $danger: #FF0000;
 	border-radius: 5px;
 	height: 5vh;
 	font-size: 3vh;
-	color: $secondColor;
+	color: $placeHolder;
 }
 :-moz-placeholder { /* Firefox 18- */
 	font-family:'nextfont';
@@ -98,7 +100,7 @@ $danger: #FF0000;
 	border-radius: 5px;
 	height: 5vh;
 	font-size: 3vh;
-	color: $secondColor;
+	color: $placeHolder;
 }
 
 
@@ -219,6 +221,7 @@ body{
 	top:0;
 	text-align:center;
 	font-size:3vh;
+
 	li{
 		display: inline-block;
 		margin-top:1vh;
@@ -226,7 +229,7 @@ body{
 	}
 	
 	a{
-		color: #ffffff;
+		color: $forthColor;
 		text-decoration: none;
 	}
 	
