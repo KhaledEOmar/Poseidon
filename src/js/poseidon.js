@@ -6,31 +6,33 @@ poseidonApp.config(function($stateProvider, $urlRouterProvider) {
 		name: 'workout',
 		url: '/workout',
 		controller:'workoutCtrl',
-		templateUrl: './workout-partial.html'
+		templateUrl: './partial/workout-partial.html'
 	}
 
 	var loginState = {
 		name: 'login',
 		url: '/',
-		templateUrl: './login-partial.html'
+		templateUrl: './partial/login-partial.html'
 	}
 
 	var signupState = {
 		name: 'signup',
 		url: '/signup',
-		templateUrl: './signup-partial.html'
+		templateUrl: './partial/signup-partial.html'
 	}
 
 	var progressState = {
 		name: 'progress',
 		url: '/progress',
-		templateUrl: './progress-partial.html'
+		controller:'progressCtrl',
+		templateUrl: './partial/progress-partial.html'
 	}
 
 	var settingsState = {
 		name: 'settings',
 		url: '/settings',
-		templateUrl: './settings-partial.html'
+		controller:'settingsCtrl',
+		templateUrl: './partial/settings-partial.html'
 	}
   
 	$stateProvider.state(loginState);
@@ -43,6 +45,9 @@ poseidonApp.config(function($stateProvider, $urlRouterProvider) {
 });
 
 
-poseidonApp.controller('workoutCtrl',['$scope',function($scope){
+
+poseidonApp.controller('workoutCtrl', function ($scope) {
+    $scope.status;
+    $scope.students;
 	$scope.date = new Date();
-}]);
+ });

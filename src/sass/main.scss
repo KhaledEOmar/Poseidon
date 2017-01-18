@@ -316,7 +316,7 @@ body{
 	margin: 0 auto;
 	color:#ffffff;
 	background-color:$primaryColor;
-
+		
 	li{
 		display:inline-block;
 		text-align:left;
@@ -325,18 +325,30 @@ body{
 	.firstCol{
 		width: 26vw;
 		font-size: 2.75vh;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		-o-text-overflow: ellipsis;
 	}
 	.secondCol{
 		width: 22vw;
 		font-size: 4vh;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		-o-text-overflow: ellipsis;
 	}
 	.thirdCol{
 		width: 25vw;
 		font-size: 4vh;
-
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		-o-text-overflow: ellipsis;
 	}
 	.delete , .repeat{
 		width:10vw;
+		text-align:center;
 	}
 	
 	img{
