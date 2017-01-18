@@ -34,6 +34,7 @@
   "dependencies": {
     "angular": "^1.6.1",
     "angular-jwt": "^0.1.8",
+    "angular-local-storage": "^0.5.0",
     "angular-lock": "^1.0.5",
     "angular-storage": "0.0.15",
     "angular-ui-router": "^0.3.2",
@@ -41,6 +42,7 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "jquery": "^3.1.1",
+    "method-override": "^2.3.7",
     "mongoose": "^4.7.6",
     "morgan": "^1.7.0"
   }
