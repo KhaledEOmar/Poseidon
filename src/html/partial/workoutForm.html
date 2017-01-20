@@ -1,17 +1,22 @@
 <section id="workoutBottomBar">
-	<section ng-click="weightLift()" ng-attr-id="{{isWeightLifting ? 'weightType': 'cardioType'}}"><!--
+	<section ng-click="switchWorkoutInput();" ng-attr-id="{{isWeightLifting ? 'weightType': 'cardioType'}}"><!--
 	--></section><!--
 	--><!--
-	--><section id="workoutForm" ng-if="isWeightLifting">
-		<input type="text" class="workoutTopInput" ng-model="workoutName" placeholder="Workout Name">
-		<input type="text" class="workoutBottomInput" ng-model="workoutWeight" placeholder="Weight">
-		<input type="text" class="workoutBottomInput" ng-model="workoutReps" placeholder="Reps">
+	--><section class="workoutForm" ng-if="isWeightLifting">
+		<form name="weightForm" ng-submit="addWeightWorkout()">	
+			<input type="text" class="workoutTopInput" ng-model="newWeightWorkout.name" placeholder="Workout Name" required>
+			<input type="number" class="workoutBottomInput" ng-model="newWeightWorkout.weight" placeholder="Weight" required>
+			<input type="number" class="workoutBottomInput" ng-model="newWeightWorkout.reps" placeholder="Reps" required>
+			<button type="submit" ng-attr-id="{{weightForm.$valid ? 'submitable': 'noSubmit'}}"></button>
+		</form>
 	</section><!--
-	--><section id="workoutForm" ng-if="!isWeightLifting">
-		<input type="text" class="workoutTopInput" ng-model="workoutName" placeholder="Workout Name">
-		<input type="text" class="workoutBottomInput" ng-model="workoutIntensity" placeholder="Intensity">
-		<input type="text" class="workoutBottomInput" ng-model="workoutTime" placeholder="Time">
+	--><section class="workoutForm" ng-if="!isWeightLifting">
+		<form name="cardioForm" ng-submit="addCardioWorkout();">	
+				<input type="text" class="workoutTopInput" ng-model="newCardioWorkout.name" placeholder="Workout Name" required>
+				<input type="number" class="workoutBottomInput" ng-model="newCardioWorkout.intensity" placeholder="Intensity" >
+				<input	type="number" class="workoutBottomInput" ng-model="newCardioWorkout.time" placeholder="Time" required>
+				<button type="submit" ng-attr-id="{{cardioForm.$valid ? 'submitable': 'noSubmit'}}"></button>
+		</form>
 	</section><!--
-	--><section ng-attr-id="{{formReady ? 'submitable': 'noSubmit'}}">
-	</section>
+	-->
 </section>

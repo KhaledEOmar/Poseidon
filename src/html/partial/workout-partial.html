@@ -1,7 +1,11 @@
 <ng-include src="'partial/header.html'"></ng-include>
 
 <div id="workouts">
-	<section class="secHead" ng-if="!weightEmpty">
+	<section class="secHead" ng-if="workouts.cardio.length == 0 && workouts.weight.length == 0"">
+		No Workouts Yet! Add one below!
+	</section><!--
+	
+	--><section class="secHead" ng-if="workouts.weight.length > 0">
 		<img src="/imgs/blueWeight.png"><!--
 		--><ul>
 			<li class="firstCol">Workout</li><!--
@@ -13,43 +17,41 @@
 		</ul>
 	</section><!--
 	
-	--><ul class="logItem" ng-if="!weightEmpty">
+	--><ul class="logItem" ng-repeat="x in workouts.weight">
 
-			<li class="firstCol">Bench Press</li><!--
-			--><li class="secondCol">180</li><!--
-			--><li class="thirdCol">8</li><!--
-			--><li class="delete"><img src="imgs/whiteDelete.png"></li><!--
+			<li class="firstCol">{{x.name}}</li><!--
+			--><li class="secondCol">{{x.weight}}</li><!--
+			--><li class="thirdCol">{{x.reps}}</li><!--
+			--><li class="delete" ng-click="deleteWeightWorkout(x.id);"><img src="imgs/whiteDelete.png"></li><!--
 			--><li class="repeat"><img src="imgs/whiteDuplicate.png"></li><!--
 			-->
 	</ul><!--
 	
-	--><section class="secHead" ng-if="!cardioEmpty">
+	--><section class="secHead" ng-if="workouts.cardio.length > 0">
 		<img src="/imgs/blueCardio.png"><!--
 		--><ul>
 			<li class="firstCol">Workout</li><!--
-			--><li class="secondCol">Weight</li><!--
-			--><li class="thirdCol">Reps</li><!--
+			--><li class="secondCol">Intensity</li><!--
+			--><li class="thirdCol">Time(min)</li><!--
 			--><li class="delete"></li><!--
 			--><li class="repeat"></li><!--
 			-->
 		</ul>
 	</section><!--
 	
-	--><ul class="logItem" ng-if="!cardioEmpty">
-			<li class="firstCol">Bench Press</li><!--
-			--><li class="secondCol">180</li><!--
-			--><li class="thirdCol">8</li><!--
-			--><li class="delete"><img src="imgs/whiteDelete.png"></li><!--
+	--><ul class="logItem" ng-repeat="y in workouts.cardio">
+
+			<li class="firstCol">{{y.name}}</li><!--
+			--><li class="secondCol">{{y.intensity}}</li><!--
+			--><li class="thirdCol">{{y.time}}</li><!--
+			--><li class="delete" ng-click="deleteCardioWorkout(y.id);"><img src="imgs/whiteDelete.png"></li><!--
 			--><li class="repeat"><img src="imgs/whiteDuplicate.png"></li><!--
 			-->
 	</ul><!--
 	
-	--><section ng-if="!cardioEmpty && !weightEmpty">
-			<button type="button">Finalize</button>
-	</section><!--
-	
-	-->
-</div>
+	--><button type="button" ng-if="workouts.cardio.length > 0 || workouts.weight.length > 0">Finalize Workout</button>
+	{{newCardioWorkout}}
 
+</div>
 
 <ng-include src="'partial/workoutForm.html'"></ng-include>

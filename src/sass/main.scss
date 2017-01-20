@@ -127,6 +127,11 @@ html {
     background: #FF0000;
 }
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
 
 body{
 	font-family:'nextfont';
@@ -270,6 +275,20 @@ body{
 	overflow: scroll;
     overflow-x: hidden;
 
+	button{
+		background-color: $thirdColor;
+        background-repeat:no-repeat;
+        border: none;
+		border-radius: 5px;
+		cursor:pointer;
+		color: $primaryColor;
+		font-family: 'nextfont';
+		text-align: center;
+		height: 5vh;
+		width: 80vw;
+		font-size: 3vh;
+		margin-top:1vh;
+	}
 }
 
 .secHead{
@@ -391,10 +410,9 @@ body{
 		background-color: $primaryColor;
 	}
 	
-	#workoutForm{
+	.workoutForm{
 		position:fixed;
 		left:17vw;
-		right:17vw;
 		display: inline-block;
 		width:66vw;
 		height: 14vh;
@@ -411,6 +429,10 @@ body{
 				font-size: 3vh;
 				color: $secondColor;
 				text-align:center;
+			
+				.ng-invalid{
+					border: 1px solid red;
+				}
 			}
 			
 			.workoutTopInput{
@@ -421,37 +443,40 @@ body{
 				width: 29vw;
 				margin: 1vw 1vw;
 			}
+
+		#submitable{
+			position:fixed;
+			right:0;
+			bottom:0;
+			border:0;
+			display: inline-block;
+			width:17vw;
+			height: 14vh;
+			text-align: center;
+			background: url(../imgs/whiteSubmit.png) no - repeat center center;
+			background-color: $accepted;	
+		}
+		
+		
+		#noSubmit{
+			position:fixed;
+			right:0;
+			bottom:0;
+			border:0;
+			display: inline-block;
+			width:17vw;
+			height: 14vh;
+			text-align: center;
+			background: url(../imgs/whiteX.png) no - repeat center center;
+			background-size: 5vh auto;
+			background-color: $danger;
+		}
 	}	
 	
-	#submitable{
-		position:fixed;
-		right:0;
-		display: inline-block;
-		width:17vw;
-		height: 14vh;
-		text-align: center;
-		background: url(../imgs/whiteSubmit.png) no - repeat center center;
-		background-color: $accepted;	
-	}
-	
-	
-	#noSubmit{
-		position:fixed;
-		right:0;
-		display: inline-block;
-		width:17vw;
-		height: 14vh;
-		text-align: center;
-		background: url(../imgs/whiteX.png) no - repeat center center;
-		background-size: 5vh auto;
-		background-color: $danger;
-	}
-	
 
-	
+
+
 }
-
-
 
 
 
