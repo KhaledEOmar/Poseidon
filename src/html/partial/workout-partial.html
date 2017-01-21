@@ -1,7 +1,7 @@
 <ng-include src="'partial/header.html'"></ng-include>
 
 <div id="workouts">
-	<section class="secHead" ng-if="workouts.cardio.length == 0 && workouts.weight.length == 0"">
+	<section class="secHead" ng-if="workouts.cardio.length == 0 && workouts.weight.length == 0">
 		No Workouts Yet! Add one below!
 	</section><!--
 	
@@ -23,7 +23,7 @@
 			--><li class="secondCol">{{x.weight}}</li><!--
 			--><li class="thirdCol">{{x.reps}}</li><!--
 			--><li class="delete" ng-click="deleteWeightWorkout(x.id);"><img src="imgs/whiteDelete.png"></li><!--
-			--><li class="repeat"><img src="imgs/whiteDuplicate.png"></li><!--
+			--><li class="repeat" ng-click="duplicateWeightWorkout(x.id);"><img src="imgs/whiteDuplicate.png"></li><!--
 			-->
 	</ul><!--
 	
@@ -45,13 +45,33 @@
 			--><li class="secondCol">{{y.intensity}}</li><!--
 			--><li class="thirdCol">{{y.time}}</li><!--
 			--><li class="delete" ng-click="deleteCardioWorkout(y.id);"><img src="imgs/whiteDelete.png"></li><!--
-			--><li class="repeat"><img src="imgs/whiteDuplicate.png"></li><!--
+			--><li class="repeat" ng-click="duplicateCardioWorkout(y.id);"><img src="imgs/whiteDuplicate.png"></li><!--
 			-->
 	</ul><!--
 	
 	--><button type="button" ng-if="workouts.cardio.length > 0 || workouts.weight.length > 0">Finalize Workout</button>
-	{{newCardioWorkout}}
 
-</div>
+</div><!--
 
-<ng-include src="'partial/workoutForm.html'"></ng-include>
+--><section id="workoutBottomBar">
+	<section ng-click="switchWorkoutInput();" ng-attr-id="{{isWeightLifting ? 'weightType': 'cardioType'}}"><!--
+	--></section><!--
+	--><!--
+	--><section class="workoutForm" ng-if="isWeightLifting">
+		<form name="weightForm" ng-submit="addWeightWorkout();">	
+			<input type="text" class="workoutTopInput" ng-model="newWeightWorkout.name" placeholder="Workout Name" required>
+			<input type="number" class="workoutBottomInput" ng-model="newWeightWorkout.weight" placeholder="Weight" required>
+			<input type="number" class="workoutBottomInput" ng-model="newWeightWorkout.reps" placeholder="Reps" required>
+			<button type="submit" ng-attr-id="{{weightForm.$valid ? 'submitable': 'noSubmit'}}"></button>
+		</form>
+	</section><!--
+	--><section class="workoutForm" ng-if="!isWeightLifting">
+		<form name="cardioForm" ng-submit="addCardioWorkout();">	
+				<input type="text" class="workoutTopInput" ng-model="newCardioWorkout.name" placeholder="Workout Name" required>
+				<input type="text" class="workoutBottomInput" ng-model="newCardioWorkout.intensity" placeholder="Intensity" >
+				<input	type="number" class="workoutBottomInput" ng-model="newCardioWorkout.time" placeholder="Time" required>
+				<button type="submit" ng-attr-id="{{cardioForm.$valid ? 'submitable': 'noSubmit'}}"></button>
+		</form>
+	</section><!--
+	-->
+</section>

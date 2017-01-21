@@ -1,11 +1,11 @@
-angular.module('poseidonControllers', ['LocalStorageModule'])
+angular.module('poseidonControllers', [])
 
-	.controller('workoutCtrl', ['$scope','$http','Workouts', 'localStorageService', function($scope, $http, Workouts, localStorageService) {
-		$scope.date = new Date();
+	.controller('workoutCtrl', ['$scope','$http','Workouts', function($scope, $http, Workouts) {
 		$scope.workouts = Workouts.getWorkouts();
+		$scope.date = $scope.workouts.date;
 		$scope.isWeightLifting = true;
-		$scope.newWeightWorkout = {id:guid(), name: "" , weight: "", reps: ""};
-		$scope.newCardioWorkout = {id:guid(), name: "" , intensity: "", time: ""};
+		$scope.newWeightWorkout = {id:guid(), name: "" , weight: "", reps: "", notes:""};
+		$scope.newCardioWorkout = {id:guid(), name: "" , intensity: "", time: "", notes:""};
 		
 		$scope.formReady = false;
 		
@@ -28,8 +28,32 @@ angular.module('poseidonControllers', ['LocalStorageModule'])
 		
 		$scope.addWeightWorkout = function(){
 			
-			Workout.addWeightWorkout($scope.newCardioWorkout);
+			Workouts.addWeightWorkout($scope.newWeightWorkout);
 			$scope.newWeightWorkout = {id:guid(), name: "" , weight: "", reps: ""};	
+		};
+		
+		$scope.duplicateWeightWorkout = function(id){
+			var workout = {id:guid(), name: "" , weight: "", reps: ""};
+			for(var i = 0; i < $scope.workouts.weight.length; i++){
+				if($scope.workouts.weight[i].id == id){
+					workout.name = $scope.workouts.weight[i].name;
+					workout.weight = $scope.workouts.weight[i].weight;
+					workout.reps = $scope.workouts.weight[i].reps;
+					Workouts.addWeightWorkout(workout);
+				}
+			}
+		};
+		
+		$scope.duplicateCardioWorkout = function(id){
+			var workout = {id:guid(), name: "" , intensity: "", time: ""};
+			for(var i = 0; i < $scope.workouts.cardio.length; i++){
+				if($scope.workouts.cardio[i].id == id){
+					workout.name = $scope.workouts.cardio[i].name;
+					workout.intensity = $scope.workouts.cardio[i].intensity;
+					workout.time = $scope.workouts.cardio[i].time;
+					Workouts.addCardioWorkout(workout);
+				}
+			}
 		};
 		
 		$scope.deleteWeightWorkout = function(id){
