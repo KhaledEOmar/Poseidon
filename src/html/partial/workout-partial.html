@@ -1,8 +1,19 @@
 <ng-include src="'partial/header.html'"></ng-include>
 
+
 <div id="workouts">
-	<section class="secHead" ng-if="workouts.cardio.length == 0 && workouts.weight.length == 0">
-		No Workouts Yet! Add one below!
+
+	<section id="datePicker">
+
+		<ul>
+			<li id="backDay"><img ng-click="goBackDay();" ng-show="!firstDay" src="imgs/backArrow.png"></li><!--
+			--><li id="date"><h1 ng-click="selectDate();">{{date | date:'MM/dd/yy'}}</h1></li><!--
+			--><li id="forwardDay"><img ng-show="notToday" ng-click="goForwardDay();" src="imgs/forwardArrow.png"></li>
+		</ul>
+
+	</section><!--
+	--><section class="secHead" ng-if="workouts.cardio.length == 0 && workouts.weight.length == 0">
+		<h1>No Workouts Yet! Add one below!</h1>
 	</section><!--
 	
 	--><section class="secHead" ng-if="workouts.weight.length > 0">
@@ -49,7 +60,12 @@
 			-->
 	</ul><!--
 	
-	--><button type="button" ng-if="workouts.cardio.length > 0 || workouts.weight.length > 0">Finalize Workout</button>
+	--><section class="secHead" ng-if="workouts.cardio.length > 0 || workouts.weight.length >0">
+		<h1>Workout Notes</h1><!--
+		--><input type="text" id="workoutNotes" ng-model="workoutNotes" placeholder="Workout Notes">
+	</section><!--
+	
+	--><button type="button" ng-if="workouts.cardio.length > 0 || workouts.weight.length > 0" ng-click="finalizeWorkout();">Finalize Workout</button>
 
 </div><!--
 
@@ -59,19 +75,20 @@
 	--><!--
 	--><section class="workoutForm" ng-if="isWeightLifting">
 		<form name="weightForm" ng-submit="addWeightWorkout();">	
-			<input type="text" class="workoutTopInput" ng-model="newWeightWorkout.name" placeholder="Workout Name" required>
-			<input type="number" class="workoutBottomInput" ng-model="newWeightWorkout.weight" placeholder="Weight" required>
-			<input type="number" class="workoutBottomInput" ng-model="newWeightWorkout.reps" placeholder="Reps" required>
+			<input type="text" class="workoutTopInput" ng-blur="lastMaxShow();" ng-model="newWeightWorkout.name"  placeholder="Workout Name" required>
+			<input type="number" class="workoutBottomInput" ng-model="newWeightWorkout.weight" ng-change="text = text.toUpperCase()" placeholder="Weight" required>
+			<input type="number" class="workoutBottomInput" ng-model="newWeightWorkout.reps" ng-change="text = text.toUpperCase()" placeholder="Reps" required>
 			<button type="submit" ng-attr-id="{{weightForm.$valid ? 'submitable': 'noSubmit'}}"></button>
 		</form>
 	</section><!--
 	--><section class="workoutForm" ng-if="!isWeightLifting">
 		<form name="cardioForm" ng-submit="addCardioWorkout();">	
-				<input type="text" class="workoutTopInput" ng-model="newCardioWorkout.name" placeholder="Workout Name" required>
-				<input type="text" class="workoutBottomInput" ng-model="newCardioWorkout.intensity" placeholder="Intensity" >
-				<input	type="number" class="workoutBottomInput" ng-model="newCardioWorkout.time" placeholder="Time" required>
+				<input type="text" class="workoutTopInput" ng-blur="lastMaxShow();" ng-model="newCardioWorkout.name"  placeholder="Workout Name" required>
+				<input type="text" class="workoutBottomInput" ng-model="newCardioWorkout.intensity" ng-change="text = text.toUpperCase()" placeholder="Intensity" >
+				<input	type="number" class="workoutBottomInput" ng-model="newCardioWorkout.time"  ng-change="text = text.toUpperCase()" placeholder="Time" required>
 				<button type="submit" ng-attr-id="{{cardioForm.$valid ? 'submitable': 'noSubmit'}}"></button>
 		</form>
 	</section><!--
 	-->
+
 </section>

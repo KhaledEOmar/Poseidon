@@ -1,0 +1,20 @@
+{
+  "name": "poseidon",
+  "description": "Workout Tracking WebApp",
+  "authors": [
+    "Khaled Omar"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/KhaledEOmar/Poseidon",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angucomplete-alt": "^3.0.0",
+    "bootstrap": "^3.3.7"
+  }
+}

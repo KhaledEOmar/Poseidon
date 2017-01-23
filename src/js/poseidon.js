@@ -12,7 +12,8 @@ poseidonApp.config(function($stateProvider, $urlRouterProvider) {
 	var loginState = {
 		name: 'login',
 		url: '/',
-		templateUrl: './partial/login-partial.html'
+		controller:'LoginController',
+		templateUrl: './partial/login-partial.html',
 	}
 
 	var signupState = {
@@ -40,6 +41,7 @@ poseidonApp.config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider.state(workoutState);
 	$stateProvider.state(progressState);
 	$stateProvider.state(settingsState);
+	
 
 	$urlRouterProvider.otherwise("/");
 });

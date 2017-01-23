@@ -1,25 +1,14 @@
-angular.module('poseidonControllers', [])
+angular.module('poseidonControllers', ['angucomplete-alt'])
 
-	.controller('workoutCtrl', ['$scope','$http','Workouts', function($scope, $http, Workouts) {
+	.controller('workoutCtrl', ['$scope','Workouts', function($scope, Workouts) {
+		
+	//----------------------WORKOUT FACTORY COMMUNICATION FUNCTIONALITY----------------------- 
 		$scope.workouts = Workouts.getWorkouts();
-		$scope.date = $scope.workouts.date;
-		$scope.isWeightLifting = true;
-		$scope.newWeightWorkout = {id:guid(), name: "" , weight: "", reps: "", notes:""};
-		$scope.newCardioWorkout = {id:guid(), name: "" , intensity: "", time: "", notes:""};
-		
-		$scope.formReady = false;
-		
-		$scope.switchWorkoutInput = function(){
-			if($scope.isWeightLifting == true){
-				$scope.isWeightLifting = false;
-				$scope.newWeightWorkout = {name: "" , weight: "", reps: ""};
-			}
-			else{
-				$scope.isWeightLifting = true;
-				$scope.newCardioWorkout = {name: "" , intensity: "", time: ""};
-			}
-		};
-		
+		var maxWorkoutList = Workouts.getMaxWorkoutList();
+		$scope.newWeightWorkout = {id:guid(), name: "" , weight: "", reps: ""};
+		$scope.newCardioWorkout = {id:guid(), name: "" , intensity: "", time: ""};
+		$scope.workoutNotes = "";
+		$scope.maxWorkout = maxWorkoutList;
 		$scope.addCardioWorkout = function(){
 			
 			Workouts.addCardioWorkout($scope.newCardioWorkout);
@@ -64,7 +53,15 @@ angular.module('poseidonControllers', [])
 			Workouts.deleteCardioWorkout(id);
 		};
 		
-		
+		$scope.finalizeWorkout = function(){
+			//save to database
+			console.log("workout saved");
+			//if saved
+			//clear localstorage
+			//put edit button
+			//if edit clicked, save button needed
+			
+		};
 		
 		function guid() {
 			function s4() {
@@ -74,9 +71,108 @@ angular.module('poseidonControllers', [])
 			}
 			return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
 			s4() + '-' + s4() + s4() + s4();
-		}
+		};
+		
+		
+	//----------------------WORKOUT FORM FUNCTIONALITY----------------------- 
+		$scope.isWeightLifting = true;
+		var max = "";
+		var repsTime = "";
+		$scope.max = max;
+		$scope.repsTime = repsTime;
+		
+		$scope.switchWorkoutInput = function(){
+			if($scope.isWeightLifting == true){
+				$scope.isWeightLifting = false;
+				$scope.newWeightWorkout = {name: "" , weight: "", reps: ""};
+			}
+			else{
+				$scope.isWeightLifting = true;
+				$scope.newCardioWorkout = {name: "" , intensity: "", time: ""};
+			}
+		};
+		
+		var workoutMaxExists = function(name){
+			if($scope.isWeightLifting){
+				for(var i = 0; i<maxWorkoutList.workouts.weight.length; i++){
+					if(name.toUpperCase() === maxWorkoutList.workouts.weight[i].name.toUpperCase()){
+						max = maxWorkoutList.workouts.weight[i].weight;
+						repsTime = maxWorkoutList.workouts.weight[i].reps;
+						return true;
+					}
+				}
+			}
+			else{
+				for(var i = 0; i<maxWorkoutList.workouts.cardio.length; i++){
+					if(name.toUpperCase() === maxWorkoutList.workouts.cardio[i].name.toUpperCase()){
+						max = maxWorkoutList.workouts.cardio[i].intensity;
+						repsTime = maxWorkoutList.workouts.cardio[i].time;
+						return true;
+					}
+				}
+			
+			}
+			return false;
+		};
+		
+		$scope.lastMaxShow = function(){
+			
+			if($scope.newWeightWorkout.name != null && $scope.newWeightWorkout.name != ""){
+				if(workoutMaxExists($scope.newWeightWorkout.name)){
+				
+					document.getElementsByClassName('workoutBottomInput')[0].placeholder="Max: " + max;
+					document.getElementsByClassName('workoutBottomInput')[1].placeholder="Reps: " + repsTime;
+				
+				}
+				else{
+				
+					document.getElementsByClassName('workoutBottomInput')[0].placeholder='Weight';
+					document.getElementsByClassName('workoutBottomInput')[1].placeholder='Reps';
+				
+				}
+			}
+			else{
+				document.getElementsByClassName('workoutBottomInput')[0].placeholder='Weight';
+				document.getElementsByClassName('workoutBottomInput')[1].placeholder='Reps';
+			}
+		};
+
+	
+	//----------------------DATE AND DATE SWITCH FUNCTIONALITY----------------------- 
+
+		$scope.date = $scope.workouts.date;
+				
+		$scope.notToday = false;
+		
+		var isToday = function(date){
+			var todayDate = new Date();
+			
+			if(date.getDate() < todayDate.getDate() || date.getMonth() < todayDate.getMonth() || date.getFullYear() < todayDate.getFullYear()){
+
+				return false;
+			}
+
+			return true;
+			
+		};
+		
+		$scope.goBackDay = function(){
+		
+		};
+		
+		$scope.goForwardDay = function(){
+		
+		};
 	}])
 		
 	.controller('progressCtrl', ['$scope','$http','Workouts', function($scope, $http, Workouts) {
 		
+	}])
+	
+	.controller('settingsCtrl', ['$scope','$http','Workouts', function($scope, $http, Workouts) {
+		
+	}])
+	
+	.controller('LoginController', ['$scope', 'User', function(User){
+
 	}]);
