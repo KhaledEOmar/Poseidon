@@ -1,7 +1,9 @@
-var poseidonApp = angular.module('poseidon', ['ui.router' , 'poseidonControllers', 'poseidonServices']);
+var poseidonApp = angular.module('poseidon', ['ui.router' , 'poseidonControllers', 'poseidonServices', 'LocalStorageModule']);
 
-poseidonApp.config(function($stateProvider, $urlRouterProvider) {
-  
+poseidonApp.config(function($stateProvider, $urlRouterProvider, localStorageServiceProvider) {
+  	localStorageServiceProvider
+	.setPrefix('poseidon');
+	
 	var workoutState = {
 		name: 'workout',
 		url: '/workout',
@@ -11,7 +13,7 @@ poseidonApp.config(function($stateProvider, $urlRouterProvider) {
 
 	var loginState = {
 		name: 'login',
-		url: '/',
+		url: '/login',
 		controller:'LoginController',
 		templateUrl: './partial/login-partial.html',
 	}
@@ -43,5 +45,22 @@ poseidonApp.config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider.state(settingsState);
 	
 
-	$urlRouterProvider.otherwise("/");
+	$urlRouterProvider.otherwise("/login");
+});
+
+poseidonApp.run(function($rootScope, $http, $location, localStorageService) {
+	/*	// keep user logged in after page refresh
+        if (localStorageService.get("currentUser") != null) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + localStorageService.get("currentUser");
+        }
+ 
+        // redirect to login page if not logged in and trying to access a restricted page
+        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+            var publicPages = ['/login'];
+            var restrictedPage = publicPages.indexOf($location.path()) === -1;
+            if (restrictedPage && localStorageService.get("currentUser") != null) {
+                $location.path('/login');
+            }
+        });*/
+	
 });

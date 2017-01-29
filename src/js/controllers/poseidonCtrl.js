@@ -9,6 +9,7 @@ angular.module('poseidonControllers', ['angucomplete-alt'])
 		$scope.newCardioWorkout = {id:guid(), name: "" , intensity: "", time: ""};
 		$scope.workoutNotes = "";
 		$scope.maxWorkout = maxWorkoutList;
+		$scope.dirtyList = false;
 		$scope.addCardioWorkout = function(){
 			
 			Workouts.addCardioWorkout($scope.newCardioWorkout);
@@ -18,6 +19,7 @@ angular.module('poseidonControllers', ['angucomplete-alt'])
 		$scope.addWeightWorkout = function(){
 			
 			Workouts.addWeightWorkout($scope.newWeightWorkout);
+			$scope.dirtyList = true;
 			$scope.newWeightWorkout = {id:guid(), name: "" , weight: "", reps: ""};	
 		};
 		
@@ -31,6 +33,7 @@ angular.module('poseidonControllers', ['angucomplete-alt'])
 					Workouts.addWeightWorkout(workout);
 				}
 			}
+			$scope.dirtyList = true;
 		};
 		
 		$scope.duplicateCardioWorkout = function(id){
@@ -43,19 +46,23 @@ angular.module('poseidonControllers', ['angucomplete-alt'])
 					Workouts.addCardioWorkout(workout);
 				}
 			}
+			$scope.dirtyList = true;
 		};
 		
 		$scope.deleteWeightWorkout = function(id){
 			Workouts.deleteWeightWorkout(id);
+			$scope.dirtyList = true;
 		};
 		
 		$scope.deleteCardioWorkout = function(id){
 			Workouts.deleteCardioWorkout(id);
+			$scope.dirtyList = true;
 		};
 		
-		$scope.finalizeWorkout = function(){
+		$scope.saveWorkout = function(){
 			//save to database
 			console.log("workout saved");
+			$scope.dirtyList = false;
 			//if saved
 			//clear localstorage
 			//put edit button
@@ -131,9 +138,29 @@ angular.module('poseidonControllers', ['angucomplete-alt'])
 				
 				}
 			}
+			else if ($scope.isWeightLifting){
+					document.getElementsByClassName('workoutBottomInput')[0].placeholder='Weight';
+					document.getElementsByClassName('workoutBottomInput')[1].placeholder='Reps';			
+			}
+			else if($scope.newCardioWorkout.name != null && $scope.newCardioWorkout.name != ""){
+				if(workoutMaxExists($scope.newCardioWorkout.name)){
+				
+					document.getElementsByClassName('workoutBottomInput')[0].placeholder="Intensity: " + max;
+					document.getElementsByClassName('workoutBottomInput')[1].placeholder="Minutes: " + repsTime;
+				
+				}
+				else{
+				
+					document.getElementsByClassName('workoutBottomInput')[0].placeholder='Intensity';
+					document.getElementsByClassName('workoutBottomInput')[1].placeholder='Time';
+				
+				}
+			}
 			else{
-				document.getElementsByClassName('workoutBottomInput')[0].placeholder='Weight';
-				document.getElementsByClassName('workoutBottomInput')[1].placeholder='Reps';
+				
+					document.getElementsByClassName('workoutBottomInput')[0].placeholder='Intensity';
+					document.getElementsByClassName('workoutBottomInput')[1].placeholder='Time';
+				
 			}
 		};
 
@@ -143,10 +170,11 @@ angular.module('poseidonControllers', ['angucomplete-alt'])
 		$scope.date = $scope.workouts.date;
 				
 		$scope.notToday = false;
-		
+		var currDisplayDate = new Date();
+		currDisplayDate.setHours(23,59,59,999);
 		var isToday = function(date){
 			var todayDate = new Date();
-			
+			todayDate.setHours(23,59,59,999);
 			if(date.getDate() < todayDate.getDate() || date.getMonth() < todayDate.getMonth() || date.getFullYear() < todayDate.getFullYear()){
 
 				return false;
@@ -156,12 +184,20 @@ angular.module('poseidonControllers', ['angucomplete-alt'])
 			
 		};
 		
-		$scope.goBackDay = function(){
-		
+		$scope.goToLastWorkout = function(){
+			currDisplayDate = new Date(currDisplayDate.getTime() - (24*60*60*1000));
+			$scope.date = currDisplayDate.getTime();
+			if(!isToday(currDisplayDate)){
+				$scope.notToday = true;
+			}
 		};
 		
-		$scope.goForwardDay = function(){
-		
+		$scope.goToNextWorkout = function(){
+			currDisplayDate = new Date(currDisplayDate.getTime() + (24*60*60*1000));
+			$scope.date = currDisplayDate.getTime();
+			if(isToday(currDisplayDate)){
+				$scope.notToday = false;
+			}
 		};
 	}])
 		
@@ -173,6 +209,27 @@ angular.module('poseidonControllers', ['angucomplete-alt'])
 		
 	}])
 	
-	.controller('LoginController', ['$scope', 'User', function(User){
-
-	}]);
+	/*.controller('LoginController', ['$location', 'AuthenticationService', function($location, AuthenticationService){
+		var vm = this;
+ 
+        vm.login = login;
+ 
+        initController();
+ 
+        function initController() {
+            // reset login status
+            AuthenticationService.Logout();
+        };
+ 
+        function login() {
+            vm.loading = true;
+            AuthenticationService.Login(vm.username, vm.password, function (result) {
+                if (result === true) {
+                    $location.path('/');
+                } else {
+                    vm.error = 'Username or password is incorrect';
+                    vm.loading = false;
+                }
+            });
+        };
+	}])*/;

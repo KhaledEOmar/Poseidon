@@ -1,10 +1,42 @@
 angular.module('poseidonServices', ['LocalStorageModule'])
-	.config(function(localStorageServiceProvider){
-		localStorageServiceProvider
-		.setPrefix('poseidon');
-	})
+
 	
-	.factory('User', function($http, localStorageService) {
+	/*.factory('AuthenticationService', function($http, localStorageService){
+		var service = {};
+ 
+        service.Login = Login;
+        service.Logout = Logout;
+ 
+        return service;
+ 
+        function Login(username, password, callback) {
+            $http.post('/api/authenticate', { username: username, password: password })
+                .success(function (response) {
+                    // login successful if there's a token in the response
+                    if (response.token) {
+                        // store username and token in local storage to keep user logged in between page refreshes
+                        $localStorage.currentUser = { username: username, token: response.token };
+ 
+                        // add jwt token to auth header for all requests made by the $http service
+                        $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
+ 
+                        // execute callback with true to indicate successful login
+                        callback(true);
+                    } else {
+                        // execute callback with false to indicate failed login
+                        callback(false);
+                    }
+                });
+        }
+ 
+        function Logout() {
+            // remove user from local storage and clear http auth header
+            localStorageService.remove("currentUser");
+            $http.defaults.headers.common.Authorization = '';
+        }
+    })*/
+	
+	.factory('User', function($http, /*AuthenticationService,*/ localStorageService) {
 
 	//----------------------GETTING USER WORKOUT DATA FROM DATABASE AND SEND TO CTRL-- 
 		var getMaxWorkoutListDB = function(){
@@ -12,7 +44,7 @@ angular.module('poseidonServices', ['LocalStorageModule'])
 		};
 		
 		//var maxWorkoutList = getMaxWorkoutListDB(); 
-		var maxWorkoutList = {user:"augustthathird", workouts:{weight:[{ name:"BENCH PRESS", weight:"180", reps:"8"}],cardio:[{name:"RUNNING", time:"45"}]}};
+		var maxWorkoutList = {user:"augustthathird", workouts:{weight:[{ name:"BENCH PRESS", weight:"180", reps:"8"}],cardio:[{name:"RUNNING", intensity:"-", time:"45"}]}};
 		var getMaxWorkoutList = function(){
 			return maxWorkoutList;
 		};
@@ -32,11 +64,6 @@ angular.module('poseidonServices', ['LocalStorageModule'])
 			//save user settings in database immediately after change
 		};
 
-
-		//--------------------USER LOGIN AND LOGOUT FUNCTIONALITY---------------
-
-		
-		
 		return {
 			getMaxWorkoutList: getMaxWorkoutList,
 			getUserSettings:getUserSettings,
@@ -48,6 +75,7 @@ angular.module('poseidonServices', ['LocalStorageModule'])
 	.factory('Workouts', function($http, User, localStorageService) {
 		var todayWorkout = function(){
 				var newDate = new Date();
+				newDate.setHours(23,59,59,999);
 				var workoutLS = getWorkoutFromLS();
 				if(workoutLS != null){
 					var oldDate = new Date(workoutLS.date);

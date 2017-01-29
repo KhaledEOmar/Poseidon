@@ -6,9 +6,9 @@
 	<section id="datePicker">
 
 		<ul>
-			<li id="backDay"><img ng-click="goBackDay();" ng-show="!firstDay" src="imgs/backArrow.png"></li><!--
-			--><li id="date"><h1 ng-click="selectDate();">{{date | date:'MM/dd/yy'}}</h1></li><!--
-			--><li id="forwardDay"><img ng-show="notToday" ng-click="goForwardDay();" src="imgs/forwardArrow.png"></li>
+			<li id="backDay"><img ng-click="goToLastWorkout();" ng-show="!firstDay" src="imgs/backArrow.png"></li><!--
+			--><li id="date"><h1>{{date | date:'MM/dd/yy'}}</h1></li><!--
+			--><li id="forwardDay"><img ng-show="notToday" ng-click="goToNextWorkout();" src="imgs/forwardArrow.png"></li>
 		</ul>
 
 	</section><!--
@@ -65,8 +65,7 @@
 		--><input type="text" id="workoutNotes" ng-model="workoutNotes" placeholder="Workout Notes">
 	</section><!--
 	
-	--><button type="button" ng-if="workouts.cardio.length > 0 || workouts.weight.length > 0" ng-click="finalizeWorkout();">Finalize Workout</button>
-
+	--><button type="button" ng-if="workouts.cardio.length > 0 || workouts.weight.length > 0" ng-click="saveWorkout();" ng-disabled="!dirtyList">Save</button>
 </div><!--
 
 --><section id="workoutBottomBar">

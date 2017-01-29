@@ -12,8 +12,12 @@ var methodOverride = require('method-override');
 
 
 // configuration ===============================================================
-//mongoose.connect(database.url); 	// connect to mongoDB database on modulus.io
-
+mongoose.connect(database.url), { config: { autoIndex: false } }); 	// connect to mongoDB database on modulus.io
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("we're live");
+});
 
 app.use(express.static('./public')); 		// set the static files location /public/img will be /img for users
 app.use(morgan('dev')); // log every request to the console

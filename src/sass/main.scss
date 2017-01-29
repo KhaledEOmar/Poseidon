@@ -180,6 +180,14 @@ body{
 			font-size: 3vh;
 			color: $secondColor;
 	}
+	input[type=password]{
+			margin-top: 1vh;
+			border: none;
+			border-radius: 5px;
+			height: 5vh;
+			font-size: 3vh;
+			color: $secondColor;
+	}
 	input[type=submit]{
 			background-color: Transparent;
             background-repeat:no-repeat;
@@ -269,6 +277,12 @@ body{
 		width:10vw;
 
 	}
+	
+	img{
+		height: 4vh;
+		width: auto;
+		margin: 1vh auto;
+	}
 
 }
 
@@ -296,6 +310,11 @@ body{
 		width: 80vw;
 		font-size: 3vh;
 		margin-top:1vh;
+	}
+	
+	button[disabled] {
+		background-color: #D3D3D3;
+		color:#ffffff;
 	}
 }
 
@@ -472,7 +491,7 @@ body{
 			width:17vw;
 			height: 14vh;
 			text-align: center;
-			background: url(../imgs/whiteSubmit.png) no - repeat center center;
+			background: url(../imgs/blueSubmit.png) no - repeat center center;
 			background-color: $accepted;	
 		}
 		
