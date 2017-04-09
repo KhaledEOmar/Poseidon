@@ -14,6 +14,8 @@ angular.module('poseidonControllers', ['angucomplete-alt'])
 			
 			Workouts.addCardioWorkout($scope.newCardioWorkout);
 			$scope.newCardioWorkout = {id:guid(), name: "" , intensity: "", time: ""};
+			document.getElementsByClassName('workoutBottomInput')[0].placeholder='Intensity';
+			document.getElementsByClassName('workoutBottomInput')[1].placeholder='Time';
 		};
 		
 		$scope.addWeightWorkout = function(){
@@ -21,6 +23,8 @@ angular.module('poseidonControllers', ['angucomplete-alt'])
 			Workouts.addWeightWorkout($scope.newWeightWorkout);
 			$scope.dirtyList = true;
 			$scope.newWeightWorkout = {id:guid(), name: "" , weight: "", reps: ""};	
+			document.getElementsByClassName('workoutBottomInput')[0].placeholder='Weight';
+			document.getElementsByClassName('workoutBottomInput')[1].placeholder='Reps';	
 		};
 		
 		$scope.duplicateWeightWorkout = function(id){
